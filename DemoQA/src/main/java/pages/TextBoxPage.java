@@ -15,10 +15,10 @@ public class TextBoxPage extends Page{
     public By lblCurrentAddress = By.xpath("currentAddress");
     public By lblpermanentAddress = By.id("permanentAddress");
     public By lblInputEmail = By.className("mr-sm-2 field-error form-control");
-
-
     public By btnSubmit = By.id("submit");
+
     public TextBoxPage(WebDriver dr) {
+
         super(dr);
     }
     public void inputData(String fullName,String email,String currentAddress,String permanentAddress) {

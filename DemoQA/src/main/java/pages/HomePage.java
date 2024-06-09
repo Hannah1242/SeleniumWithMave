@@ -11,5 +11,9 @@ public class HomePage extends Page{
         driver.findElement(By.xpath("//*[text()='Elements']")).click();
         return new ElementsPage(driver);
     }
+    public FormPage clickFormPage(){
+        driver.findElement(By.xpath("//*[text()='Forms']")).click();
+        return new FormPage(driver);
+    }
 
 }

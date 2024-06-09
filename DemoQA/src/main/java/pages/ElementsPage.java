@@ -11,4 +11,8 @@ public class ElementsPage extends Page{
         driver.findElement(By.xpath("//span[text()='Text Box']")).click();
         return new TextBoxPage(driver);
     }
+    public CheckBoxPage clickCheckBoxPage(){
+        driver.findElement(By.xpath("//span[text()='Check Box']")).click();
+        return new CheckBoxPage(driver);
+    }
 }

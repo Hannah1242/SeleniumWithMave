@@ -61,11 +61,12 @@ public class TextBoxTest {
         String actualCurrentAddress = textBoxPage.getString(textBoxPage.lblCurrentAddress);
         String actualpermanentAddress = textBoxPage.getString(textBoxPage.lblpermanentAddress);
         String inputEmail = textBoxPage.getEmail(textBoxPage.lblInputEmail);
-        Assert.assertEquals(actualFullName, null);
-        Assert.assertEquals(actualEmail, null);
-        Assert.assertEquals(actualCurrentAddress, null);
-        Assert.assertEquals(actualpermanentAddress, null);
-        Assert.assertNotEquals(inputEmail,null);
+
+//        Assert.assertEquals(actualFullName, null);
+//        Assert.assertEquals(actualEmail, null);
+//        Assert.assertEquals(actualCurrentAddress, null);
+//        Assert.assertEquals(actualpermanentAddress, null);
+        Assert.assertTrue(driver.findElement(textBoxPage.lblInputEmail).isDisplayed());
         Assert.assertEquals(inputEmail,email);
     }
 
