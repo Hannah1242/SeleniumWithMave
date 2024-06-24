@@ -2,18 +2,30 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PracticeFormPage extends Page{
     public By txtFirstName = By.id("firstName");
     public By txtLastName = By.id("lastName");
     public By txtEmail = By.id("userEmail");
+    public String rdGenderXpath = "//label[text()='{@param}']";
+    public String chkHobbiesXpath = "//label[text()='{@param}']";
     public By txtMobileNumber = By.id("userNumber");
-    public By txtSubjects = By.id("subjectsInput");
+    public By drpYearElement = By.xpath("//*[@class = 'react-datepicker__year-select']");
+    public By drpMonthElement = By.xpath("//*[@class = 'react-datepicker__month-select']");
+    public String dateXpath = "//*[text()='{@param}']";
+    public By txtSubjects = By.id("subjectsIn");
     public By txtUpload = By.id("uploadPicture");
     public By txtCurrentAddress = By.id("currentAddress");
     public By txtStage = By.id("react-select-3-input");
     public By txtCity = By.id("react-select-4-input");
-    public By popThank = By.xpath("//*[div[text()='Thanks for submitting the form']]\")");
+    public By popThank = By.xpath("//*[div[text()='Thanks for submitting the form']])");
     public By btnSubmit = By.id("submit");
 
     public By lblFullName = By.xpath("//table//tr[contains(., 'Name')]/td[2]");
@@ -50,4 +62,32 @@ public class PracticeFormPage extends Page{
         String text = driver.findElement(locator).getText();
         return text;
     }
+
+    public void clickGender(String gender){
+        //driver.findElement(By.xpath(rdGenderXpath.replace("@param", gender))).click();
+        testBase.findElementByXpathAndParam(rdGenderXpath, gender).click();
+    }
+
+    public void clickHobbies(String hobbies){
+        //driver.findElement(By.xpath(chkHobbiesXpath.replace("@param", hobbies))).click();
+        testBase.findElementByXpathAndParam(chkHobbiesXpath, hobbies).click();
+    }
+    public void inputDOB(String dateOfBirth){
+        DateFormat fmt = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+        String dateOfBirthArr[] ;
+        try {
+            Date d = fmt.parse(dateOfBirth);
+            dateOfBirthArr = d.toString().split(" ");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Select drpYear = new Select(driver.findElement(drpYearElement));
+        drpYear.selectByVisibleText(dateOfBirthArr[2]);
+        Select drpMonth = new Select(driver.findElement(drpMonthElement));
+        drpMonth.selectByVisibleText(dateOfBirthArr[1]);
+        testBase.findElementByXpathAndParam(dateXpath,dateOfBirthArr[0]);
+    }
+
+
+
 }

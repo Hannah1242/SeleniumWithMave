@@ -11,6 +11,7 @@ public class CheckBoxPage extends Page{
     public By chkHome = By.xpath("//*[@for='tree-node-home']/span[@class='rct-checkbox']/*[name()='svg']");
     public By chkIcon = By.xpath("//button[@class='rct-collapse rct-collapse-btn']/*[name()='svg']");
     public By checked = By.xpath("//*[@class='rct-icon rct-icon-check']");
+    public By listE = By.xpath("//div[@id ='result']//span");
 
     public By desktop = By.xpath("//span[text()='Desktop']");
     public By documents = By.xpath("//span[text()='Documents']");
@@ -36,7 +37,7 @@ public class CheckBoxPage extends Page{
         return classValue;
     }
     public String getText(){
-        List<WebElement> elementList = driver.findElements(By.xpath("//div[@id ='result']//span"));
+        List<WebElement> elementList = driver.findElements(listE);
         String result = "";
         for(WebElement element : elementList){
             String text = element.getText();

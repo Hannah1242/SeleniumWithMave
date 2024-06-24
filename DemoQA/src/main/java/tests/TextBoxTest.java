@@ -1,5 +1,6 @@
 package tests;
 
+import common.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,7 +10,7 @@ import pages.ElementsPage;
 import pages.HomePage;
 import pages.TextBoxPage;
 
-public class TextBoxTest {
+public class TextBoxTest extends TestCase {
     @Test
     public void submitSucessfully(){
 
@@ -18,13 +19,7 @@ public class TextBoxTest {
         String currentAddress = "Ha Noi";
         String permanentAddress = "1234";
 
-        String projectFolder = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver" , projectFolder + "/driver/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
-
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(testBase.driver);
         ElementsPage elementsPage = homePage.clickElement();
         TextBoxPage textBoxPage = elementsPage.clickTextBox();
         textBoxPage.inputData(fullName,email,currentAddress,permanentAddress);
@@ -37,7 +32,6 @@ public class TextBoxTest {
         Assert.assertEquals(actualEmail, email);
         Assert.assertEquals(actualCurrentAddress, currentAddress);
         Assert.assertEquals(actualpermanentAddress, permanentAddress);
-        driver.quit();
     }
     public void emailFormatIsWrong(){
         String fullName = "Thuy Hang";
@@ -45,13 +39,7 @@ public class TextBoxTest {
         String currentAddress = "Ha Noi";
         String permanentAddress = "1234";
 
-        String projectFolder = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver" , projectFolder + "/driver/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
-
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(testBase.driver);
         ElementsPage elementsPage = homePage.clickElement();
         TextBoxPage textBoxPage = elementsPage.clickTextBox();
         textBoxPage.inputData(fullName,email,currentAddress,permanentAddress);
@@ -61,12 +49,7 @@ public class TextBoxTest {
         String actualCurrentAddress = textBoxPage.getString(textBoxPage.lblCurrentAddress);
         String actualpermanentAddress = textBoxPage.getString(textBoxPage.lblpermanentAddress);
         String inputEmail = textBoxPage.getEmail(textBoxPage.lblInputEmail);
-
-//        Assert.assertEquals(actualFullName, null);
-//        Assert.assertEquals(actualEmail, null);
-//        Assert.assertEquals(actualCurrentAddress, null);
-//        Assert.assertEquals(actualpermanentAddress, null);
-        Assert.assertTrue(driver.findElement(textBoxPage.lblInputEmail).isDisplayed());
+        Assert.assertTrue(testBase.driver.findElement(textBoxPage.lblInputEmail).isDisplayed());
         Assert.assertEquals(inputEmail,email);
     }
 

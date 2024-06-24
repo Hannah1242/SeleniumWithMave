@@ -10,19 +10,14 @@ import pages.HomePage;
 
 import static org.testng.Assert.*;
 
-public class CheckBoxTest {
+public class CheckBoxTest extends TestCase{
     @Test
     public void VerifyCheckBoxCorrectly(){
         String check1= "Desktop";
         String check2= "Documents";
         String check3= "Downloads";
-        String projectFolder = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver" , projectFolder + "/driver/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://demoqa.com/");
-        driver.manage().window().maximize();
 
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(testBase.driver);
         ElementsPage elementsPage = homePage.clickElement();
         CheckBoxPage checkBoxPage = elementsPage.clickCheckBoxPage();
         String fullClassValue = checkBoxPage.getAttributeTag(checkBoxPage.chkHome);
@@ -36,7 +31,6 @@ public class CheckBoxTest {
         Assert.assertEquals(checkBoxPage.getTextCheckBox(checkBoxPage.desktop),check1);
         Assert.assertEquals(checkBoxPage.getTextCheckBox(checkBoxPage.documents),check2);
         Assert.assertEquals(checkBoxPage.getTextCheckBox(checkBoxPage.downloads),check3);
-        driver.quit();
     }
 
 }
